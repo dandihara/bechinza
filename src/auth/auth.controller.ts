@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { UserService } from 'src/user/user.service';
 import { LoginRequestDto } from 'src/type/dto/LoginRequestDto';
 import { JwtStrategy } from './jwt.strategy';
+import { CreateUserDto } from 'src/type/dto/CreateUserDto';
 
 @Controller('auth')
 export class AuthController {
@@ -12,7 +13,7 @@ export class AuthController {
     private jwtStrategy: JwtStrategy,
   ) {}
 
-  @Post('login')
+  @Post('')
   async login(@Body() body: LoginRequestDto) {
     const user = await this.userService.findUser(body.email);
     if (!user) {
@@ -27,10 +28,15 @@ export class AuthController {
     if (!isValidatePassword) {
       return new Error('비밀번호가 일치하지 않습니다');
     }
-
     return await this.authService.generateToken({
       email: user.email,
       nickname: user.nickname,
     });
+  }
+
+  @Post('sign')
+  async register(@Body() body: CreateUserDto) {
+    const user = await this.userService.register(body);
+    return user;
   }
 }
