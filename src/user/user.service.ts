@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { UserRepositoryService } from 'src/database/service/user.repository.service';
-import { RegisterUserDto } from 'src/type/dto/RegisterUserDto';
+import { RegisterUserRequestDto } from 'src/type/dto/RegisterUserRequest.dto';
 
 @Injectable()
 export class UserService {
@@ -13,19 +13,19 @@ export class UserService {
     return user;
   }
 
-  async register(registerInfo: RegisterUserDto) {
+  async register(registerUserRequestDto: RegisterUserRequestDto) {
     const hashedPassword = await JwtStrategy.hashPassword(
-      registerInfo.password,
+      registerUserRequestDto.password,
     );
     await this.userRepositoryService.add({
-      email: registerInfo.email,
+      email: registerUserRequestDto.email,
       password: hashedPassword,
-      nickname: registerInfo.nickname,
+      nickname: registerUserRequestDto.nickname,
     });
     return {
-      email: registerInfo.email,
+      email: registerUserRequestDto.email,
       password: hashedPassword,
-      nickname: registerInfo.nickname,
+      nickname: registerUserRequestDto.nickname,
     };
   }
 }

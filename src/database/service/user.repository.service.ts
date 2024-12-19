@@ -1,7 +1,7 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../model/user';
 import { Repository } from 'typeorm';
-import { RegisterUserDto } from 'src/type/dto/RegisterUserDto';
+import { RegisterUserRequestDto } from 'src/type/dto/RegisterUserRequest.dto';
 
 export class UserRepositoryService {
   constructor(
@@ -9,11 +9,11 @@ export class UserRepositoryService {
     private userRepository: Repository<User>,
   ) {}
 
-  async add(info: RegisterUserDto) {
+  async add(registerUserRequestDto: RegisterUserRequestDto) {
     return this.userRepository.insert({
-      email: info.email,
-      password: info.password,
-      nickname: info.nickname,
+      email: registerUserRequestDto.email,
+      password: registerUserRequestDto.password,
+      nickname: registerUserRequestDto.nickname,
     });
   }
 

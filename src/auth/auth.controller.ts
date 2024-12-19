@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserService } from 'src/user/user.service';
-import { LoginRequestDto } from 'src/type/dto/LoginRequestDto';
+import { LoginRequestDto } from 'src/type/dto/LoginRequest.dto';
 import { JwtStrategy } from './jwt.strategy';
-import { CreateUserDto } from 'src/type/dto/CreateUserDto';
+import { CreateUserRequestDto } from 'src/type/dto/CreateUserRequest.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -35,8 +35,8 @@ export class AuthController {
   }
 
   @Post('sign')
-  async register(@Body() body: CreateUserDto) {
-    const user = await this.userService.register(body);
+  async register(@Body() createUserRequestDto: CreateUserRequestDto) {
+    const user = await this.userService.register(createUserRequestDto);
     return user;
   }
 }

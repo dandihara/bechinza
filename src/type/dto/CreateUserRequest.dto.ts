@@ -6,7 +6,7 @@ import {
   Length,
 } from 'class-validator';
 
-export class CreateUserDto {
+export class CreateUserRequestDto {
   @IsEmail()
   @IsDefined()
   email: string;
