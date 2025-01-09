@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { User } from './user';
+import { User } from './User';
 import { BoardType } from '../enum/BoardType.enum';
 
 @Entity('board')

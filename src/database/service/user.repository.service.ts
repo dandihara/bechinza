@@ -1,5 +1,5 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../model/user';
+import { User } from '../model/User';
 import { Repository } from 'typeorm';
 import { RegisterUserRequestDto } from 'src/type/dto/RegisterUserRequest.dto';
 
