@@ -10,7 +10,7 @@ import { BoardModule } from './board/board.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `.env.${process.env.NODE_ENV}` || '.env.development', // 기본 설정은 Dev
+      envFilePath: process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env.dev',
       isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
